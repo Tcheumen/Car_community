@@ -1,0 +1,273 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./app/shared/partials/abstract/variables";
+@import "./app/shared/partials/abstract/mixins";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  line-height: unset;
+  outline: none;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+h4,
+p {
+  margin-bottom: 0;
+}
+hr {
+  background-color: #19284a;
+  opacity: 0.1;
+}
+.click {
+  cursor: pointer;
+}
+.text-red {
+  color: #d93b2b !important;
+}
+.text-body {
+  color: #3a2e4d !important;
+}
+.text-light-blue {
+  color: #1890ff !important;
+}
+
+.br-8 {
+  border-radius: 0.8rem;
+}
+
+.w-30 {
+  width: 30%;
+}
+
+.w-70 {
+  width: 70%;
+}
+
+.border {
+  border: 0.1rem solid rgba(#19284a, 0.15) !important;
+}
+
+@import "./assets/fonts/Walsheim/stylesheet.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700;800;900&display=swap");
+
+body {
+  font-family: "GT Walsheim Pro", sans-serif !important;
+  color: #19284a;
+}
+
+table.table {
+  caption {
+    color: $purple-700;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  tbody {
+    border-top: none !important;
+    tr {
+      border: 0.05rem solid $white-200;
+      td {
+        color: $text-body;
+        font-size: 1.4rem;
+        padding: 1.6rem;
+        border-top: 0.1rem solid #f0f0f0 !important;
+        &:last-child {
+          color: $blue-300;
+        }
+        .dot {
+          width: 0.8rem;
+          height: 0.8rem;
+          border-radius: 50%;
+          display: block;
+          &-success {
+            background-color: $success;
+          }
+          &-error {
+            background-color: $error;
+          }
+        }
+      }
+    }
+  }
+  thead {
+    background-color: $white-300;
+    border-top: none !important;
+    border-bottom: solid 0.1rem $white-200 !important;
+    th {
+      font-family: $walsheim_font_bold;
+      border-bottom: 0;
+      font-weight: 700;
+      font-size: 1.4rem;
+      line-height: 2.1rem;
+      color: $text-body;
+      padding: 1.4rem;
+    }
+  }
+}
+
+.badge {
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7.5rem;
+  border-radius: 0.5rem;
+  &-error {
+    background: rgba($error, 0.1);
+    color: $error;
+    border: 0.1rem solid $error;
+  }
+  &-success {
+    background: rgba($success, 0.1);
+    color: $success;
+    border: 0.1rem solid $success;
+  }
+  &-warning {
+    background: rgba($warning, 0.1);
+    color: $warning;
+    border: 0.1rem solid $warning;
+  }
+}
+
+.form-group {
+  margin-bottom: 3.2rem;
+}
+
+.form-control {
+  height: 4.8rem;
+  background: $grey-300;
+  border-radius: 0.8rem;
+  font-size: 1.5rem;
+  color: $text-body;
+  width: 100%;
+  border: none;
+  padding: 1rem 1.5rem;
+  &::placeholder {
+    color: $text-body;
+    font-size: 1.4rem;
+  }
+  &:focus {
+    background: rgba($purple-700, 0.071);
+  }
+}
+textarea.form-control {
+  min-height: 4.8rem;
+  height: auto;
+}
+
+table.table {
+  caption {
+    color: $purple-700;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  tbody {
+    border-top: none !important;
+    tr {
+      border: 0.05rem solid $white-200;
+      td {
+        color: $text-body;
+        font-size: 1.4rem;
+        padding: 1.6rem;
+        border-top: 0.1rem solid #f0f0f0 !important;
+        &:last-child {
+          color: $blue-300;
+        }
+        .dot {
+          width: 0.8rem;
+          height: 0.8rem;
+          border-radius: 50%;
+          display: block;
+          &-success {
+            background-color: $success;
+          }
+          &-error {
+            background-color: $error;
+          }
+        }
+      }
+    }
+  }
+  thead {
+    background-color: $white-300;
+    border-top: none !important;
+    border-bottom: solid 0.1rem $white-200 !important;
+    th {
+      font-family: $walsheim_font_bold;
+      border-bottom: 0;
+      font-weight: 700;
+      font-size: 1.4rem;
+      line-height: 2.1rem;
+      color: $text-body;
+      padding: 1.4rem;
+    }
+  }
+}
+
+#formAccordion {
+  .accordion-item {
+    box-shadow: none;
+    border: none;
+    .accordion-button {
+      box-shadow: none;
+      color: $text-body;
+      font-weight: bold;
+      font-size: 1.4rem;
+      cursor: pointer;
+      width: fit-content;
+      white-space: nowrap;
+      &::after {
+        margin-left: 1rem;
+      }
+      &:not(.collapsed) {
+        background: transparent;
+        border: none;
+        color: $text-body;
+        box-shadow: none;
+        &::after {
+          margin-left: 1rem;
+        }
+      }
+    }
+    .w-fill-available {
+      width: -webkit-fill-available;
+      height: 0.2rem;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        right: 0;
+        border-bottom: solid 0.1rem $purple-100;
+        width: 100%;
+      }
+    }
+    .accordion-collapse {
+      background: transparent;
+      .accordion-body {
+        font-size: 1.4rem;
+        color: $purple-700;
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+<ng-container
+  *ngIf="
+   allAppointments.length > 0
+  "
+>
+
+  <div>
+
+    <div class="archive-retention-wrapper m-0 d-none d-md-block">
+      <app-filetra-card>
+        <div>
+          <app-table-header
+            [table_name]="'Alle Termine'"
+          ></app-table-header>
+          <div class="archive-retention-table table-responsive bg-white">
+            <table class="table caption-top text-nowrap" datatable>
+              <ng-container
+                *ngIf="allAppointments.length > 0"
+              >
+                <thead>
+                  <tr class="py-3">
+                    <th>Auto</th>
+                    <th>Lagerhalter</th>
+                    <th>Standort</th>
+                    <th>Gebuchtes Datum</th>
+                  </tr>
+                </thead>
+              </ng-container>
+              <tbody>
+                <ng-container>
+                  <tr *ngFor="let item of allAppointments">
+                    <td>
+                      {{ item?.car}}
+                    </td>
+                    <td>
+                      {{ item?.uid_request }} 
+                    </td>
+                    <td>
+                      {{ item?.bin }}
+                    </td>
+                    <td>
+                      {{ item?.date?.replace("T", "   ") }}
+                    </td>
+                  </tr></ng-container
+                >
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </app-filetra-card>
+    </div>
+  </div>
+
+
+  
+</ng-container>

@@ -1,0 +1,75 @@
+@import "../shared/partials/abstract/variables";
+@import "../shared/partials/abstract/mixins";
+
+table.table {
+  caption {
+    color: $purple-700;
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  tbody {
+    border-top: none !important;
+    tr {
+      border: 0.05rem solid $white-200;
+      td {
+        color: $text-body;
+        font-size: 1.4rem;
+        padding: 1.6rem;
+        border-top: 0.1rem solid #f0f0f0 !important;
+        &:last-child {
+          color: $blue-300;
+        }
+        .dot {
+          width: 0.8rem;
+          height: 0.8rem;
+          border-radius: 50%;
+          display: block;
+          &-success {
+            background-color: $success;
+          }
+          &-error {
+            background-color: $error;
+          }
+        }
+      }
+    }
+  }
+  thead {
+    background-color: $white-300;
+    border-top: none !important;
+    border-bottom: solid 0.1rem $white-200 !important;
+    th {
+      font-family: $walsheim_font_bold;
+      border-bottom: 0;
+      font-weight: 700;
+      font-size: 1.4rem;
+      line-height: 2.1rem;
+      color: $text-body;
+      padding: 1.4rem;
+    }
+  }
+}
+
+.badge {
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7.5rem;
+  border-radius: 0.5rem;
+  &-error {
+    background: rgba($error, 0.1);
+    color: $error;
+    border: 0.1rem solid $error;
+  }
+  &-success {
+    background: rgba($success, 0.1);
+    color: $success;
+    border: 0.1rem solid $success;
+  }
+  &-warning {
+    background: rgba($warning, 0.1);
+    color: $warning;
+    border: 0.1rem solid $warning;
+  }
+}

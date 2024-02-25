@@ -1,0 +1,80 @@
+<ng-container
+  
+>
+  <div>
+    <!-- mobile table -->
+
+
+    <!-- desktop table -->
+
+    <div class="archive-retention-wrapper m-0 d-none d-md-block">
+      <app-filetra-card
+        ><div>
+          <app-table-header [table_name]="'Alle Autos'"></app-table-header>
+          <div class="archive-retention-table table-responsive bg-white">
+            <table class="table caption-top text-nowrap" datatable>
+                <thead>
+                  <tr class="py-3">
+                    <th>Lager</th>
+                    <th>Auto</th>
+                    <th>Benutzer</th>
+                    <th>Status</th>
+                    <th>Aktion</th>
+                  </tr>
+                </thead>
+              <tbody>
+                <ng-container>
+                  <tr *ngFor="let item of requests">
+                    <td>
+                      {{ item?.name }}
+                    </td>
+                    <td>
+                      {{ item?.plate }}
+                    </td>
+                    <td>
+                      {{ item?.uid_request   }}
+                    </td>
+                    <td>
+                      <div class="d-flex justify-content-start">
+                        <span
+                          class="badge click"
+                          [ngClass]="{
+                            'badge-success': item.status == 'ready',
+                            'badge-warning': item.status == 'pending',
+                            'badge-error': item.status == 'not-ready'
+                          }"
+                          >{{
+                              item.status == "ready"   ? "Fahrbereit"
+                            : item.status == "pending" ? "Wartet auf Antwort"
+                            :                            "Nicht-Fahrbereit"
+                            }}
+                        </span>
+                      </div>
+                    </td>
+                    <ng-container *ngIf="item.status == 'pending'">
+                      <td class="">
+                        <span class="me-3 click" (click)="accept(item.id)">
+                        Akzeptieren
+                        </span>
+                        <span class="text-danger click" (click)="deny(item.id)"> 
+                          Ablehnen 
+                        </span>
+                      </td>
+                    </ng-container>
+                    <ng-container *ngIf="item.status != 'pending'">
+                      <td class="">
+                        <span class="me-3 click" (click)="change_readyness(item.id)">
+                         Fahrbereitschaft ändern
+                        </span>
+                      </td>
+                    </ng-container>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </app-filetra-card>
+    </div>
+  </div>
+</ng-container>

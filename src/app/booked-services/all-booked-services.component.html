@@ -1,0 +1,148 @@
+<div class="container">
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-12">
+        <div class="wrapper_header mb-5">
+          <h3>Suche Lagerplätze</h3>
+        </div>
+        <div class="wrapper_body">
+          <form [formGroup]="searchForm">
+            <div class="row">
+              <div class="col-12 col-md-6 mb-4">
+                <div class="form-group form_group">
+                  <label>Standort auswählen</label>
+                  <input
+                    type="text"
+                    placeholder="Stadt eingeben"
+                    formControlName="city"
+                    class="form-control"
+                    (keydown.enter)="submit()"
+                  />
+                  <div class="invalid-feedback">Bitte  Standort auswählen</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 mb-4">
+                <div class="form-group form_group">
+                  <label>Ein Auto auswählen</label>
+                  <select
+                    name=""
+                    id=""
+                    formControlName="car"
+                    class="form-control"
+                    (keydown.enter)="submit()"
+                    [ngClass]="{
+                      'is-invalid':
+                        (searchForm.get('car')?.errors &&
+                        searchForm.get('car')?.touched) ||
+                        (searchForm.get('car')?.hasError('required') &&
+                        searchForm)
+                    }"
+                  >
+                    <option value="" disabled selected hidden>Ein Auto auswählen</option>
+                    <option *ngFor="let item of cars">
+                      {{ item?.plate }}
+                    </option>
+                  </select>
+                  <div
+                        class="invalid-feedback"
+                        *ngIf="
+                          searchForm.get('car')?.hasError('required') &&
+                          searchFormSubmitted
+                        "
+                      >
+                        Required
+                      </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="Aktionen d-flex justify-content-end mt-3">
+            <button
+              mat-button
+              cdkFocusInitial
+              class="btn btn-purple btn-md"
+              (click)="submit()"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="searched">
+  <ng-container
+    *ngIf="
+      services.length > 0
+    "
+  >
+    <div class="wrapper">
+      <div class="archive-retention-wrapper m-0 d-none d-md-block">
+        <app-filetra-card
+          ><div>
+            <app-table-header
+              [table_name]="'Gebuchte Services'"
+            ></app-table-header>
+            <div class="archive-retention-table table-responsive bg-white">
+              <table class="table caption-top text-nowrap" datatable>
+                <ng-container
+                  *ngIf="services.length > 0"
+                >
+                  <thead>
+                    <tr class="py-3">
+                      <th>Name</th>
+                      <th>Gebuchtes Datum</th>
+                      <th>Ablaufdatum</th>
+                      <th>Status</th>
+                      <th>Aktion</th>
+                      <!-- <th>Actions</th> -->
+                    </tr>
+                  </thead>
+                </ng-container>
+                <tbody>
+                  <ng-container *ngIf="services.length > 0">
+                    <tr *ngFor="let item of services">
+                      <td>{{ item?.name }}</td>
+                      <td>
+                        {{ item?.dateListed }}
+                      </td>
+                      <td>
+                        {{ item?.expiryDate }}
+                      </td>
+
+                      <td>
+                        <div class="d-flex justify-content-start">
+                          <span
+                            class="badge click"
+                            [ngClass]="{
+                              'badge-success': item.status == 'accepted',
+                              'badge-warning': item.status == 'pending',
+                            }"
+                            >{{
+                                item.status == "accepted"   ? "Aktik"
+                              : item.status == "pending" ? "Verfügbar"
+                              :                            " "
+                              }}
+                          </span>
+                        </div>
+                      </td>
+                      <ng-container *ngIf="item.status == 'pending'">
+                        <td class="">
+                          <span class="me-3 click" (click)="item.status = 'accepted'">
+                          Buchen
+                          </span>
+                        </td>
+                      </ng-container>
+                    </tr></ng-container
+                  >
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </app-filetra-card>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

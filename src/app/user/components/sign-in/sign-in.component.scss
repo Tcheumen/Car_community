@@ -1,0 +1,454 @@
+// Partials
+
+// Responsive breakpoints
+$S: 576px;
+$M: 768px; // Phablets
+$L: 992px; // 10" Tablets and desktops
+$XL: 1200px; // desktops..
+
+@mixin screenSize($canvas) {
+  @if $canvas==XS {
+    /* Smaller Mobile devices */
+    @media only screen and (max-width: calc(#{$S - 1px}) ) {
+      @content;
+    }
+  } @else if $canvas==S {
+    /* Mobile devices */
+    @media only screen and (max-width: calc(#{$M - 1px}) ) {
+      @content;
+    }
+  } @else if $canvas==M {
+    /* Tablets and phablets */
+    @media only screen and (min-width: $M) and (max-width: calc(#{$L - 1px}) ) {
+      @content;
+    }
+  } @else if $canvas==L {
+    /* Landscape tablets and desktop or laptops */
+    @media only screen and (min-width: $L) and (max-width: calc(#{$XL - 1px}) ) {
+      @content;
+    }
+  } @else if $canvas==XL {
+    /* Landscape tablets and desktop or laptops */
+    @media only screen and (min-width: $XL) {
+      @content;
+    }
+  }
+}
+// how to use
+/*
+
+  import screenSize mixin via *@import "abstracts/mixins.scss";*
+
+
+  @include screenSize(S) {
+    your style goes here...
+  }
+
+  where S is the size which can be
+  S, M, L or XL.
+
+  */
+
+@mixin minSize($canvas) {
+  @if $canvas==S {
+    /* Mobile devices */
+    @media only screen and (min-width: $S) {
+      @content;
+    }
+  } @else if $canvas==M {
+    /* Tablets and phablets */
+    @media only screen and (min-width: $M) {
+      @content;
+    }
+  } @else if $canvas==L {
+    /* Landscape tablets and desktop or laptops */
+    @media only screen and (min-width: $L) {
+      @content;
+    }
+  } @else if $canvas==XL {
+    /* Landscape tablets and desktop or laptops */
+    @media only screen and (min-width: $XL) {
+      @content;
+    }
+  }
+}
+
+@mixin maxSize($canvas) {
+  @if $canvas==S {
+    /* Mobile devices */
+    @media only screen and (max-width: $S) {
+      @content;
+    }
+  } @else if $canvas==M {
+    /* Tablets and phablets */
+    @media only screen and (max-width: $M) {
+      @content;
+    }
+  } @else if $canvas==L {
+    /* Landscape tablets and desktop or laptops */
+    @media only screen and (max-width: $L) {
+      @content;
+    }
+  } @else if $canvas==XL {
+    /* Landscape tablets and desktop or laptops */
+    @media only screen and (max-width: $XL) {
+      @content;
+    }
+  }
+}
+
+@mixin text_truncate($line_number) {
+  @if $line_number >= 1 {
+    display: -webkit-box;
+    -webkit-line-clamp: $line_number;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } @else {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+  }
+}
+
+// colors and fonts go here.
+
+// Brand Colours
+$purple-100: #f6f4f9;
+$blue-300: #1890ff;
+$purple-700: #19284a;
+$purple-900: #14203b;
+$green-400: #4fe3c1;
+$green-600: #39a58b;
+$green-700: #1a5a4b;
+
+// Neutrals & Shades
+$white-100: #ffffff;
+$white-200: #f7f7f7;
+$white-300: #fafafa;
+$white-700: #f2f2f2;
+$text-body: #3a2e4d;
+$black-100: #000000;
+$black-850: #1f1f1f;
+$grey-300: rgba($purple-700, 0.07);
+$grey-400: rgba($purple-700, 0.1);
+$grey-500: rgba($purple-900, 0.2);
+
+// Alerts
+$success: #5c993d;
+$warning: #f2b12e;
+$error: #d93b2b;
+$info: #418ed9;
+$tip: #4d4d4d;
+
+//Fonts specified by Emmanuel
+$walsheim_font: "GT Walsheim Pro", sans-serif;
+$walsheim_font_bold: "GT Walsheim Pro bold", sans-serif;
+
+.btn {
+  font-weight: 600;
+  box-shadow: 0rem 0.8rem 1.6rem -0.5rem rgba(0, 29, 31, 0.1);
+  border-radius: 0.8rem;
+  font-size: 1.4rem;
+  text-align: center;
+  justify-content: center;
+}
+.btn-purple {
+  background-color: $purple-700;
+  color: $white-100;
+  display: flex;
+  align-items: center;
+  line-height: 0;
+  transition: all ease 0.3s;
+  &:hover {
+    color: $white-100;
+    background-color: rgba($purple-700, 0.7);
+  }
+}
+.btn-outline-green {
+  border: 0.15rem solid $purple-700;
+  background-color: transparent;
+  color: $purple-700;
+  transition: all ease 0.3s;
+  &:hover {
+    color: rgba($purple-700, 0.7);
+    background-color: transparent;
+  }
+}
+
+.btn-outline-grey {
+  border: 0.15rem solid $grey-500;
+  background-color: transparent;
+  color: $purple-700;
+  transition: all ease 0.3s;
+  display: flex;
+  align-items: center;
+  &:hover {
+    color: rgba($purple-700, 0.7);
+    border: 0.15rem solid $grey-400;
+    background-color: transparent;
+  }
+}
+
+.btn-lg {
+  min-height: 4.8rem;
+  padding: 1rem 2rem;
+}
+
+.btn-md {
+  min-height: 3.8rem;
+  min-width: 8rem;
+  padding: 0.3rem 1.5rem;
+}
+
+.btn-sm {
+  min-height: 3rem;
+  border-radius: 0.4rem;
+}
+
+.badge {
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7.5rem;
+  border-radius: 0.5rem;
+  &-error {
+    background: rgba($error, 0.1);
+    color: $error;
+    border: 0.1rem solid $error;
+  }
+  &-success {
+    background: rgba($success, 0.1);
+    color: $success;
+    border: 0.1rem solid $success;
+  }
+  &-warning {
+    background: rgba($warning, 0.1);
+    color: $warning;
+    border: 0.1rem solid $warning;
+  }
+}
+
+.form_group {
+  font-family: $walsheim_font !important;
+  margin-bottom: 1.6rem !important;
+  label {
+    font-weight: 400;
+    color: $text-body;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    margin-bottom: 0.4rem;
+    span {
+      color: $error;
+      margin-left: 0.4rem;
+    }
+  }
+
+  input,
+  select {
+    width: 100%;
+    height: 4.8rem;
+    border-radius: 0.6rem;
+    font-size: 1.4rem;
+    color: $purple-700;
+    padding: 1.35rem 1.6rem;
+    background: rgba($purple-700, 0.07);
+
+    &.is-invalid {
+      border: 0.1rem solid $error !important;
+      background: $white-100;
+    }
+    &:focus {
+      background: $white-100;
+      color: $purple-700;
+      border: 0.1rem solid rgba($purple-700, 0.4);
+      box-shadow: none;
+    }
+    &::placeholder {
+      color: $text-body;
+    }
+  }
+
+  select {
+    background: rgba($purple-700, 0.07)
+      url("../../../../assets/icons/arrow-down.svg") no-repeat 97% 50%;
+    &:focus {
+      background: $white-100 url("../../../../assets/icons/arrow-down.svg")
+        no-repeat 97% 50%;
+    }
+  }
+  .ng-select {
+    width: 100%;
+    input {
+      height: 3rem;
+    }
+  }
+
+  .ng-select.ng-select-single .ng-select-container {
+    border: none;
+    margin-top: 0.4rem;
+    box-sizing: border-box;
+    outline: none;
+    width: 100%;
+    height: 4.8rem;
+    border-radius: 0.8rem;
+    font-size: 1.4rem;
+    color: $purple-700;
+    padding: 1.35rem 1.6rem;
+    background: rgba($purple-700, 0.07);
+    display: flex;
+    align-items: center;
+  }
+  .ng-select.ng-select-focused.ng-select-opened > .ng-select-container {
+    background: $white-100 !important;
+    color: $purple-700;
+    border: 0.1rem solid rgba($purple-700, 0.4);
+    box-shadow: none;
+  }
+  .ng-select.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+    border-color: rgba($purple-700, 0.4);
+    box-shadow: none;
+  }
+  /* Border Color */
+  .ng-select.ng-invalid.ng-touched .ng-select-container {
+    border: 0.1rem solid $error !important;
+    background: $white-100;
+  }
+
+  /* Arrow Color */
+  .ng-select.ng-invalid.ng-touched .ng-arrow-wrapper .ng-arrow {
+    border-color: $error transparent transparent;
+  }
+  /* Placeholder Color */
+  .ng-select.ng-invalid.ng-touched .ng-select-container {
+    color: $error;
+  }
+}
+
+// End Partials
+
+// Layout styles
+
+$side_bar_width: 59rem;
+$medium_side_bar_width: 35rem;
+$small_side_bar_width: 23rem;
+
+$side_padding: 12.4rem 26rem 12.4rem 14.2rem;
+$mobile_side_padding: 3rem;
+
+.wrapper {
+  background: $purple-100 url(../../../../assets/images/pattern.svg) no-repeat;
+  // width: 100%;
+  min-height: 100vh;
+  display: flex;
+  &__layout {
+    background: $white-100;
+    box-shadow: 0rem 0rem 2rem rgba($purple-700, 0.1);
+    border-radius: 12px;
+    padding: 6rem 5rem 9rem;
+    margin: auto;
+  }
+}
+@include maxSize($canvas: M) {
+  .wrapper {
+    &__layout {
+      // width: 100%;
+      padding: $mobile_side_padding;
+    }
+  }
+}
+@include screenSize($canvas: L) {
+  .wrapper {
+    &__layout {
+      // width: 100%;
+      padding: $mobile_side_padding;
+    }
+  }
+}
+@include screenSize($canvas: M) {
+  .wrapper {
+    &__layout {
+      // width: 100%;
+      padding: $mobile_side_padding;
+    }
+  }
+}
+
+//End Layout styles
+
+// Main component styles
+
+.wrapper_login {
+  height: 100%;
+  max-width: 54.8rem;
+  width: 100%;
+  @include minSize($canvas: L) {
+    max-width: 54.8rem;
+    width: 54.8rem;
+  }
+
+  &__logo {
+    margin-bottom: 2.4rem;
+    text-align: center;
+  }
+
+  &__header {
+    h1 {
+      font-family: $walsheim_font_bold !important;
+      font-weight: 700;
+      font-size: 3.2rem;
+      line-height: 4.8rem;
+      text-align: center;
+      margin-bottom: 0.4rem;
+    }
+    p {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1.4rem;
+      line-height: 2.1rem;
+      text-align: center;
+      color: $text-body;
+      margin-bottom: 3.9rem;
+    }
+  }
+  &__forgot,
+  &__sign_up {
+    margin-bottom: 3.2rem;
+    a,
+    p {
+      color: $purple-700;
+      font-weight: 600;
+      font-size: 1.4rem;
+      line-height: 1.8rem;
+      text-decoration: none;
+    }
+    span {
+      color: $purple-700;
+      text-decoration: underline;
+    }
+  }
+  &__login_btn {
+    width: 100%;
+    background: $purple-700;
+    box-shadow: 0rem 0.4rem 0.8rem -0.1rem rgba(0, 74, 77, 0.15);
+    border-radius: 0.8rem;
+    font-weight: 600;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: $white-100;
+    padding: 1.35rem 0;
+    transition: 0.6s all ease;
+    &:hover {
+      background: rgba($purple-700, 0.8);
+    }
+    span.center {
+      width: 100%;
+    }
+  }
+}

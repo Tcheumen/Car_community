@@ -1,0 +1,83 @@
+
+<div class="container">
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-12">
+        <div class="wrapper_header mb-5">
+          <h3>Einen Termin vereinbaren</h3>
+        </div>
+        <div class="wrapper_body">
+          <form [formGroup]="apptForm">
+            <div class="row">
+              <div class="col-12 col-md-6 mb-4">
+                <div class="form-group form_group">
+                  <label>Termin Datum & Zeit <span>● </span></label>
+                  <input
+                    type="datetime-local"
+                    class="form-control"
+                    placeholder="Select A Date & Time"
+                    formControlName="date"
+                    [ngClass]="{
+                      'is-invalid':
+                        (apptForm.get('date')?.errors &&
+                          apptForm.get('date')?.touched) ||
+                        (apptForm.get('date')?.hasError('required'))
+                    }"
+                  />
+                  <div class="invalid-feedback">Bitte  Datum auswählen</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 mb-4">
+                <div class="form-group form_group">
+                  <label>Ein Auto auswählen</label>
+                  <select
+                    class="form-control"
+                    formControlName="car"
+                    placeholder="Ein Auto auswählen"
+                    (keydown.enter)="submit()"
+                    [ngClass]="{
+                      'is-invalid':
+                        (apptForm.get('car')?.errors &&
+                        apptForm.get('car')?.touched) ||
+                        (apptForm.get('car')?.hasError('required') &&
+                        apptForm)
+                    }"
+                  >
+                    <option value="" disabled selected hidden>Ein Auto auswählen</option>
+                    <option *ngFor="let item of cars">
+                      {{ item?.plate }}
+                    </option>
+                  </select>
+                  <div
+                        class="invalid-feedback"
+                        *ngIf="
+                        apptForm.get('car')?.hasError('required') &&
+                        apptForm
+                        "
+                      >
+                        Required
+                      </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="Aktionen d-flex justify-content-end mt-3">
+            <button
+              mat-button
+              cdkFocusInitial
+              class="btn btn-purple btn-md"
+              (click)="submit()"
+            >
+              Termin vereinbaren
+            </button>
+          </div>
+        </div>
+        <ng-container *ngIf="getIsSubmitted()">
+          <div class="wrapper_header mb-5" style="color: green;">
+            <h2>Terminanfrage gesendet</h2>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

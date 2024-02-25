@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "vintage-car-community"
+  },
+  "targets": {
+    "vintage-car-community": {
+      "hosting": {
+        "vintage-car-community": [
+          "vintage-car-community"
+        ]
+      }
+    }
+  }
+}

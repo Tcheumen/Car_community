@@ -1,0 +1,170 @@
+<div class="container">
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-12">
+        <div class="wrapper_header mb-5">
+          <h3>Autos suchen</h3>
+        </div>
+        <div class="wrapper_body">
+          <form [formGroup]="searchForm">
+            <div class="row">
+              <div class="col-12 col-md-4 mb-4">
+                <label for="plate" class="d-flex dropdown-item click">
+                  <span class="me-3">
+                    <input
+                      type="radio"
+                      name="searchType"
+                      id="plate"
+                      value="plate"
+                      formControlName="searchType"
+                    />
+                  </span>
+                  <span>
+                    {{ "Nach Autokennzeichen" }}
+                  </span>
+                </label>
+              </div>
+              <div class="col-12 col-md-4 mb-4">
+                <label for="location" class="d-flex dropdown-item click">
+                  <span class="me-3">
+                    <input
+                      type="radio"
+                      name="searchType"
+                      id="location"
+                      value="location"
+                      formControlName="searchType"
+                    />
+                  </span>
+                  <span>
+                    {{ "Nach Standort" }}
+                  </span>
+                </label>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="form-group form_group">
+                  <label>Suche Begriff<span>● </span></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [placeholder]="
+                      searchForm.get('searchType')?.value == 'plate'
+                        ? 'Enter Plate Number'
+                        : 'Enter Location Name'
+                    "
+                    formControlName="term"
+                  
+                  />
+                  <div
+                    class="invalid-feedback"
+                   
+                  >
+                  Erforderlich
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="actions d-flex justify-content-end mt-3">
+            <button
+              mat-button
+              cdkFocusInitial
+              class="btn btn-purple btn-md"
+              (click)="submit()"
+            >
+            Suche
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="searched">
+  <ng-container>
+    <div>
+      <!-- mobile table -->
+
+      <section class="d-block d-md-none">
+        <h3 class="mb-3 mobileTableCaption">Auto Bereitschaft</h3>
+        <div
+          *ngFor="let item of cars"
+          class="border br-8 p-4 mb-5"
+          style="font-size: 1.4rem"
+        >
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break">Name: </label>
+            <p class="text-body w-70 ps-3 text-break">
+              {{ item?.name }}
+            </p>
+          </div>
+          <hr />
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break">Jahr </label>
+            <p class="text-body w-70 ps-3 text-break">
+              {{ item?.year }}
+            </p>
+          </div>
+          <hr />
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break"
+              >Bereit zur Abholung
+            </label>
+          </div>
+          <hr />
+          <div class="d-flex">
+            <label class="fw-bold text-body w-30 text-break">Action: </label>
+            <div class="click d-flex">
+              <img class="pe-2" src="assets/icons/update.svg" alt="" />
+              <span>Akzeptieren</span>
+            </div>
+            <div class="click d-flex">
+              <img class="pe-2" src="assets/icons/update.svg" alt="" />
+              <span>Ablehnen</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- desktop table -->
+
+      <div class="archive-retention-wrapper m-0 d-none d-md-block">
+        <app-filetra-card
+          ><div>
+            <app-table-header [table_name]="'Auto Bereitschaft'"></app-table-header>
+            <div class="archive-retention-table table-responsive bg-white">
+              <table class="table caption-top text-nowrap" datatable>
+                <ng-container>
+                  <thead>
+                    <tr class="py-3">
+                      <th>Name</th>
+                      <th>Mach</th>
+                      <th>Jahr</th>
+                      <th>Bereit zur Abholung</th>
+                      <th>Aktionen</th>
+                    </tr>
+                  </thead>
+                </ng-container>
+                <tbody>
+                  <ng-container>
+                    <tr *ngFor="let item of cars">
+                      <td>{{ item?.name }}</td>
+                      <td>
+                        {{ item?.year }}
+                      </td>
+                      <td>
+                        <div class="d-flex justify-content-start">
+                        </div>
+                      </td>
+
+                    </tr></ng-container
+                  >
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </app-filetra-card>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

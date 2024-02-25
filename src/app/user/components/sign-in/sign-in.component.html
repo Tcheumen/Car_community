@@ -1,0 +1,110 @@
+<div class="wrapper">
+  <div class="wrapper__layout">
+    <div class="wrapper_login">
+      <div class="wrapper_login__logo click">
+        <img
+          src="../../../../assets/images/logo-black.png"
+          alt="App logo"
+          routerLink="/"
+        />
+      </div>
+      <div class="wrapper_login__header">
+        <h1>Welcome back</h1>
+        <p>Enter your credentials below to Login</p>
+      </div>
+      <div class="wrapper_login__form">
+        <div [formGroup]="loginForm">
+          <div class="form_group mb-5">
+            <label for="email" class="form-label">Email </label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              placeholder="Enter email address"
+              (keyup)="checkForKeyEnter($event)"
+              formControlName="email"
+              autocomplete="email"
+              [ngClass]="{
+                'is-invalid':
+                  (loginForm.get('email')?.errors &&
+                    loginForm.get('email')?.touched) ||
+                  (loginForm.get('email')?.hasError('required') &&
+                    loginFormSubmitted) ||
+                  (loginForm.get('email')?.hasError('email') &&
+                    loginFormSubmitted)
+              }"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="
+                loginForm.get('email')?.hasError('required') &&
+                loginFormSubmitted &&
+                !loginForm.get('email')?.hasError('email') &&
+                loginFormSubmitted
+              "
+            >
+              Required
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="
+                loginForm.get('email')?.hasError('email') &&
+                loginFormSubmitted &&
+                !loginForm.get('email')?.hasError('required') &&
+                loginFormSubmitted
+              "
+            >
+              Enter a valid email
+            </div>
+          </div>
+          <div class="form_group mb-3">
+            <label for="password" class="form-label">Password </label>
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Enter password"
+              id="password"
+              formControlName="password"
+              (keyup)="checkForKeyEnter($event)"
+              autocomplete="current-password"
+              [ngClass]="{
+                'is-invalid':
+                  (loginForm.get('password')?.errors &&
+                    loginForm.get('password')?.touched) ||
+                  (loginForm.get('password')?.hasError('required') &&
+                    loginFormSubmitted)
+              }"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="
+                loginForm.get('password')?.hasError('required') &&
+                loginFormSubmitted
+              "
+            >
+              Required
+            </div>
+          </div>
+          <div class="wrapper_login__forgot">
+            <a routerLink="../forgot-password"> Forgot Password?</a>
+          </div>
+          <button
+            class="btn wrapper_login__login_btn"
+            (click)="login()"
+            [disabled]="isLoggingIn"
+          >
+            <span class="center">
+              <span>Login</span>
+            </span>
+          </button>
+          <div class="wrapper_login__sign_up mt-4">
+            <p>
+              Dont have an account?
+              <a routerLink="/sign-up"><span>Sign Up</span></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

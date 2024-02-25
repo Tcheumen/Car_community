@@ -1,0 +1,137 @@
+<div class="container">
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-12">
+        <div class="wrapper_header mb-5">
+          <h3>Suche Lagerplätze</h3>
+        </div>
+        <div class="wrapper_body">
+          <form [formGroup]="searchForm">
+            <div class="row">
+              <div class="col-12 col-md-6 mb-4">
+                <div class="form-group form_group">
+                  <label>Standort auswählen</label>
+                  <input
+                    type="text"
+                    placeholder="Stadt eingeben"
+                    formControlName="city"
+                    class="form-control"
+                    (keydown.enter)="submit()"
+                  />
+                  <div class="invalid-feedback">Bitte  Standort auswählen</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 mb-4">
+                <div class="form-group form_group">
+                  <label>Ein Auto auswählen</label>
+                  <select
+                    name=""
+                    id=""
+                    formControlName="car"
+                    class="form-control"
+                    (keydown.enter)="submit()"
+                    [ngClass]="{
+                      'is-invalid':
+                        (searchForm.get('car')?.errors &&
+                        searchForm.get('car')?.touched) ||
+                        (searchForm.get('car')?.hasError('required') &&
+                        searchForm)
+                    }"
+                  >
+                    <option value="" disabled selected hidden>Ein Auto auswählen</option>
+                    <option *ngFor="let item of cars">
+                      {{ item?.plate }}
+                    </option>
+                  </select>
+                  <div
+                        class="invalid-feedback"
+                        *ngIf="
+                          searchForm.get('car')?.hasError('required') &&
+                          searchFormSubmitted
+                        "
+                      >
+                        Required
+                      </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="Aktionen d-flex justify-content-end mt-3">
+            <button
+              mat-button
+              cdkFocusInitial
+              class="btn btn-purple btn-md"
+              (click)="submit()"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="searched">
+  <ng-container>
+    <div>
+      <!-- desktop table -->
+      <div class="archive-retention-wrapper m-0 d-none d-md-block">
+        <app-filetra-card
+          ><div>
+            <app-table-header [table_name]="'Storage Bin'"></app-table-header>
+            <div class="archive-retention-table table-responsive bg-white">
+              <table class="table caption-top text-nowrap" datatable>
+                <ng-container>
+                  <thead>
+                    <tr class="py-3">
+                      <th>Name</th>
+                      <th>Standort</th>
+                      <th>Dienstzeit</th>
+                      <th>Aktionen</th>
+                    </tr>
+                  </thead>
+                </ng-container>
+                <tbody>
+                  <ng-container
+                  *ngIf="storageBins.length > 0">
+                    <tr *ngFor="let storage of storageBins">
+                      <td>{{ storage?.name }}</td>
+                      <td>
+                        {{ storage?.location?.streetName }},
+                        {{ storage?.location?.houseNumber }} 
+                        {{ storage?.location?.city }}
+                      </td>
+                      <td>
+                        {{ storage?.serviceTime?.start }} -
+                        {{ storage?.serviceTime?.end }}
+                      </td>
+                      <td class="">
+                        <ng-container
+                          *ngIf="!isRequestStatusPending()">
+                          <span class="me-3 click" (click)="requestBin(storage.name)">
+                            Einlagerung Anfragen
+                          </span>
+                        </ng-container>
+                        <ng-container 
+                          *ngIf="isRequestStatusPending() && storage.name != 'Lionels Lager'">
+                            <h4 style="color: red;">Einlagerung angefragt</h4>
+                        </ng-container>
+                      </td>
+                    </tr></ng-container
+                  >
+                <ng-container
+                  *ngIf="storageBins.length == 0">
+                  <tr>
+                    <td>Keine Ergebnisse!</td>
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </app-filetra-card>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

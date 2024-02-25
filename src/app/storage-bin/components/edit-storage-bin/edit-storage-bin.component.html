@@ -1,0 +1,195 @@
+<div class="container">
+  <div class="back justify-content-between">
+    <div class="d-flex click">
+      <img src="assets/icons/backk.svg" alt="_back"/>
+      <h4  class="mt-3">Go Back</h4>
+    </div>
+  </div>
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-12">
+        <div class="wrapper_header mb-5">
+          <h3>Lagerplatz bearbeiten</h3>
+        </div>
+        <div class="wrapper_body">
+          <form [formGroup]="binForm">
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <legend>Name</legend>
+                <div class="form-group form_group">
+                  <label>Name <span>● </span></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Name"
+                    
+                    formControlName="name"
+                    [ngClass]="{
+                      'is-invalid':
+                        (binForm.get('name')?.errors &&
+                          binForm.get('name')?.touched) ||
+                        (binForm.get('name')?.hasError('required'))
+                    }"
+                  />
+                  <div
+                    class="invalid-feedback"
+                    *ngIf="
+                      binForm.get('name')?.hasError('required') 
+                    "
+                  >
+                    Required
+                  </div>
+                </div>
+              </div>
+              <div class="col-12" formGroupName="location">
+                <legend>Standort</legend>
+                <div class="row">
+                  <div class="col-12 col-md-4">
+                    <div class="form-group form_group">
+                      <label>Strasse Name <span>● </span></label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Street Name"
+                     
+                        formControlName="streetName"
+                        [ngClass]="{
+                          'is-invalid':
+                            (binForm.get('streetName')?.errors &&
+                              binForm.get('streetName')?.touched) ||
+                            (binForm.get('streetName')?.hasError('required'))
+                        }"
+                      />
+                      <div
+                        class="invalid-feedback"
+                        *ngIf="
+                          binForm.get('streetName')?.hasError('required') 
+                        "
+                      >
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <div class="form-group form_group">
+                      <label>Hausnummer <span>● </span></label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter House Number"
+                      
+                        formControlName="houseNumber"
+                        [ngClass]="{
+                          'is-invalid':
+                            (binForm.get('houseNumber')?.errors &&
+                              binForm.get('houseNumber')?.touched) ||
+                            (binForm.get('houseNumber')?.hasError('required'))
+                        }"
+                      />
+                      <div
+                        class="invalid-feedback"
+                        *ngIf="
+                          binForm.get('houseNumber')?.hasError('required') 
+                        "
+                      >
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <div class="form-group form_group">
+                      <label>Stadt<span>● </span></label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter City"
+                        
+                        formControlName="city"
+                        [ngClass]="{
+                          'is-invalid':
+                            (binForm.get('city')?.errors &&
+                              binForm.get('city')?.touched) ||
+                            (binForm.get('city')?.hasError('required'))
+                        }"
+                      />
+                      <div
+                        class="invalid-feedback"
+                        *ngIf="
+                          binForm.get('city')?.hasError('required')
+                        "
+                      >
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12" formGroupName="serviceTime">
+                <legend>Dienstzeit</legend>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <div class="form-group form_group">
+                      <label>Startzeit <span>● </span></label>
+                      <input
+                        type="time"
+                        class="form-control"
+                        placeholder="Enter Start Time"
+                       
+                        formControlName="start"
+                        [ngClass]="{
+                          'is-invalid':
+                            (binForm.get('start')?.errors &&
+                              binForm.get('start')?.touched) ||
+                            (binForm.get('start')?.hasError('required'))
+                        }"
+                      />
+                      <div
+                        class="invalid-feedback"
+                        *ngIf="
+                          binForm.get('start')?.hasError('required')
+                        "
+                      >
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group form_group">
+                      <label>Endzeit<span>● </span></label>
+                      <input
+                        type="time"
+                        class="form-control"
+                        placeholder="Enter End Time"
+                       
+                        formControlName="end"
+                        [ngClass]="{
+                          'is-invalid':
+                            (binForm.get('end')?.errors &&
+                              binForm.get('end')?.touched) ||
+                            (binForm.get('end')?.hasError('required'))
+                        }"
+                      />
+                      <div
+                        class="invalid-feedback"
+                        *ngIf="
+                          binForm.get('end')?.hasError('required')
+                        "
+                      >
+                        Required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="actions d-flex justify-content-end mt-3">
+            <button class="btn btn-secondary btn-lg" (click)="submit()">
+              Lagerplatz bearbeiten
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
